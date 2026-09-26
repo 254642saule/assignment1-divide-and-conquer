@@ -9,8 +9,8 @@ $tests = (Get-ChildItem tests/daa/*.java).FullName
 & java com.sun.tools.javac.Main --release 17 -encoding UTF-8 -cp target/classes -d target/test-classes $tests
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 if ($Command -eq "test") {
-    & java -cp 'target/classes;target/test-classes' daa.AlgorithmTests
+    & java -Xms128m -Xmx512m -cp 'target/classes;target/test-classes' daa.AlgorithmTests
 } else {
-    & java -cp target/classes daa.Main $Command
+    & java -Xms256m -Xmx1024m -cp target/classes daa.Main $Command
 }
 exit $LASTEXITCODE

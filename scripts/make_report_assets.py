@@ -144,7 +144,9 @@ def output_capture(text, title, source, filename):
     image.save(SHOTS / filename)
 
 output_capture((RESULTS / "demo.txt").read_text(), "Program output", "results/demo.txt", "program_output.png")
-output_capture((RESULTS / "tests.txt").read_text(), "Correctness tests", "results/tests.txt", "test_results.png")
+test_output = (RESULTS / "tests.txt").read_text()
+assert "ALL TESTS PASSED:" in test_output, "Do not render an incomplete test run"
+output_capture(test_output, "Correctness tests", "results/tests.txt", "test_results.png")
 raw_lines = (RESULTS / "experiment.txt").read_text().splitlines()
 excerpt = raw_lines[:4] + [line for line in raw_lines if line.startswith(tuple(ALGORITHMS)) and "RANDOM" in line and "300000" in line] + raw_lines[-3:]
 output_capture("\n".join(excerpt), "Experiment output - selected lines", "results/experiment.txt", "experiment_results.png")
