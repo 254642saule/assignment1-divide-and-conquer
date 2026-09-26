@@ -6,69 +6,6 @@ This project implements four divide-and-conquer algorithms in Java 17 and compar
 
 The Java code has no external runtime or test-library dependencies. The repository includes reproducible inputs, reference-based tests, all raw measurements, plots, saved console output and a Git development history. `k` is **zero-based**: `k = 0` selects the minimum; the experiment selects `k = n / 2` (the upper median for even `n`).
 
-### Run the project
-
-Install/use a **JDK 17 or newer**, with `java` on PATH. Run from the project root.
-
-**Windows PowerShell:**
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/run.ps1 demo
-powershell -ExecutionPolicy Bypass -File scripts/run.ps1 test
-powershell -ExecutionPolicy Bypass -File scripts/run.ps1 experiment
-```
-
-The execution-policy option applies only to the launched process. It does not change the permanent Windows policy.
-
-**Linux / macOS / Git Bash:**
-
-```bash
-bash scripts/run.sh demo
-bash scripts/run.sh test
-bash scripts/run.sh experiment
-```
-
-**Maven alternative:**
-
-```bash
-mvn clean package
-java -Xms256m -Xmx1024m -jar target/assignment1-divide-and-conquer-1.0.0.jar demo
-java -Xms256m -Xmx1024m -jar target/assignment1-divide-and-conquer-1.0.0.jar experiment
-```
-
-The Maven `test` phase runs `daa.AlgorithmTests` through Antrun and fails on a nonzero test exit. Its first run needs access to Maven plugins. The delivered code and tests were compiled/executed directly with OpenJDK 17; Maven and PowerShell were not installed in the measurement environment, so those two launch routes were not executed there. The dependency-free Bash/JDK route was executed successfully.
-
-Regenerate aggregate tables, plots and saved-output images after a new experiment:
-
-```bash
-python -m pip install -r scripts/requirements.txt
-python scripts/make_report_assets.py
-```
-
-To refresh the text captured in the images on Bash, use `bash scripts/run.sh demo > results/demo.txt`, `bash scripts/run.sh test > results/tests.txt`, and `bash scripts/run.sh experiment > results/experiment.txt` before regenerating. Windows users can capture the same commands with `Tee-Object -FilePath results/demo.txt` (and the corresponding test/experiment paths).
-
-### Repository map
-
-| Location | Purpose |
-| --- | --- |
-| `src/daa/MergeSorter.java` | Stable merge sort, reusable buffer, cutoff 24 |
-| `src/daa/QuickSorter.java` | Random pivot, three-way partition, smaller-first recursion |
-| `src/daa/DeterministicSelector.java` | In-place groups-of-five selection |
-| `src/daa/ClosestPairSolver.java` | Closest pair and quadratic reference |
-| `src/daa/Point.java` | Immutable finite-coordinate point |
-| `src/daa/Experiment.java` | Warm-up, timing, metrics and CSV output |
-| `src/daa/Main.java` | Demo and experiment commands |
-| `src/daa/Metrics.java`, `DataSets.java` | Shared counters and input generation |
-| `tests/daa/AlgorithmTests.java` | Automated correctness and contract tests |
-| `results/` | Raw CSV, aggregates, environment and console logs |
-| `docs/plots/`, `docs/screenshots/` | Four plots and three output captures |
-| `docs/EXPERIMENT_TABLES.md` | All input-size/type tables |
-| `docs/DEFENSE_RU.md` | Russian explanation and defense questions |
-| `docs/SUBMISSION_RU.md` | Run and GitHub submission instructions |
-| `docs/DAA_Assignment1_Guide_RU.pdf` | Six-page Russian quick-start and defense guide |
-| `scripts/` | Portable runners and report regeneration |
-| `.github/workflows/java-ci.yml` | Automatic Java 17 build/test configuration for Linux and Windows |
-| `pom.xml`, `.gitignore` | Maven configuration and generated-file exclusions |
 
 ## B. Algorithm analysis
 
