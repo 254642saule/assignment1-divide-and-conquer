@@ -255,21 +255,3 @@ The executed suite reports **24,692 successful checks**:
 - Invalid arguments and point coordinates, unchanged point input, all-equal QuickSort, and a forced extreme-pivot stack test.
 
 Tests throw on failure and return a nonzero exit code; they do not rely on Java's disabled-by-default `assert` keyword. The full test log is [results/tests.txt](results/tests.txt).
-
-## Git workflow and submission
-
-The repository's commits record the actual preparation sequence: structure, each algorithm, tests, instrumentation, real experiments, runner fixes and report. The initial complete version is tagged `v1.0`. The GitHub submission update adds automated correctness checks on the real feature branch `ci/automated-tests`, merged into `main` with a merge commit and tagged `v1.1`. Both branches and tags are included in the delivery archive and backup bundle. Use `git log --graph --oneline --all` and `git branch --all` to inspect them. The history is not reconstructed or backdated; commit attribution reflects the author that performed these steps.
-
-The GitHub Actions configuration runs `mvn clean verify` and the packaged demo on Java 17 for both Linux and Windows when changes are pushed or a pull request targets `main`. It is configured but has **not run on GitHub yet**, because the repository has not been published. After pushing, inspect the Actions result rather than assuming it passed. The workflow uses only read access to repository contents. See the official [GitHub Java/Maven workflow guide](https://docs.github.com/en/actions/tutorials/build-and-test-code/java-with-maven).
-
-For later work, create a branch for a concrete change, commit that change, run the tests and merge it into `main`. Use a pull request when reviewing changes on GitHub. Existing merge history is local Git history; no GitHub pull request is claimed to exist.
-
-The assignment requires a **working GitHub repository URL**, submitted in Moodle. The report and analysis are this **README.md**; the Russian PDF is only a supporting guide. A local archive alone is not the submission. Follow [SUBMISSION_RU.md](docs/SUBMISSION_RU.md) to push the included repository, both branches and its tags; uploading files through the website does not preserve this local commit history. Check the rendered README and the repository visibility required by the instructor before submitting the URL.
-
-## References
-
-- Assignment handout: *Assignment 1: Divide-and-Conquer Algorithm Analysis*, supplied course PDF.
-- Erik Demaine and Charles Leiserson, MIT 6.046J, [Lecture 6: Order Statistics](https://ocw.mit.edu/courses/6-046j-introduction-to-algorithms-sma-5503-fall-2005/ca4e5673e2b64eacc5691cda564cba49_lec6.pdf), for the median-of-medians selection argument.
-- Princeton Algorithms, [ClosestPair documentation](https://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/ClosestPair.html), for the divide-and-conquer closest-pair method and its complexity.
-
-The code uses no external algorithm library. The derivations, counters and experiment discussion above refer to the implementation in this repository.
