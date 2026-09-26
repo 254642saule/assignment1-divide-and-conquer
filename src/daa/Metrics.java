@@ -1,6 +1,4 @@
 package daa;
-
-/** Per-invocation counters. No static mutable state and no timing inside loops. */
 public final class Metrics {
     public long comparisons;
     public long swaps;
@@ -29,8 +27,6 @@ public final class Metrics {
             arrayWrites += 2;
         }
     }
-
-    /** Insertion sort on the half-open interval [lo, hi). */
     void insertionSort(int[] a, int lo, int hi) {
         for (int i = lo + 1; i < hi; i++) {
             int value = a[i];

@@ -1,8 +1,6 @@
 package daa;
 
 import java.util.Objects;
-
-/** Stable merge sort with one reusable buffer and a constant insertion cutoff. */
 public final class MergeSorter {
     public static final int INSERTION_CUTOFF = 24;
 

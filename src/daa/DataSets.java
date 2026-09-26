@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.SplittableRandom;
 
-/** Seeded input generation shared by experiments and tests. */
 public final class DataSets {
     public enum Type { RANDOM, SORTED, REVERSE_SORTED, DUPLICATE_HEAVY }
     private DataSets() { }

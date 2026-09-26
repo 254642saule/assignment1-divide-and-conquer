@@ -3,7 +3,6 @@ package daa;
 import java.util.Arrays;
 import java.util.Objects;
 
-/** Divide-and-conquer closest pair with linear y-merges and a reusable strip. */
 public final class ClosestPairSolver {
     public record Pair(Point first, Point second, double distance) {
         public boolean hasPair() { return first != null; }
@@ -36,7 +35,6 @@ public final class ClosestPairSolver {
         m.enter(depth);
         if (hi - lo <= 3) {
             Pair best = bruteForce(work, lo, hi, m);
-            // Constant-size insertion sort establishes the y-order invariant.
             for (int i = lo + 1; i < hi; i++) {
                 Point p = work[i];
                 int j = i - 1;
@@ -50,7 +48,6 @@ public final class ClosestPairSolver {
             return best;
         }
         int mid = lo + (hi - lo) / 2;
-        // Save before children change their intervals from x-order to y-order.
         double middleX = work[mid].x();
         Pair left = solve(work, auxiliary, strip, lo, mid, depth + 1, m);
         Pair right = solve(work, auxiliary, strip, mid, hi, depth + 1, m);
@@ -75,7 +72,6 @@ public final class ClosestPairSolver {
             }
         }
         for (i = 0; i < count; i++) {
-            // The packing argument bounds useful successors by seven.
             for (j = i + 1; j < count && j <= i + 7; j++) {
                 m.comparisons++;
                 if (strip[j].y() - strip[i].y() >= best.distance()) break;
@@ -87,7 +83,6 @@ public final class ClosestPairSolver {
         return best;
     }
 
-    /** Independent quadratic reference, intended for small correctness checks. */
     public static Solution bruteForce(Point[] points) {
         validate(points);
         Metrics m = new Metrics();

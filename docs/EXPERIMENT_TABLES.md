@@ -15,7 +15,7 @@ Generated from `results/results.csv`. Times are medians of seven trials in milli
 Maximum recursion depth:
 
 | n | MergeSort | QuickSort | Select | ClosestPair |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | ---  --- |
 | 100 | 4 | 4 | 6 | 7 |
 | 1,000 | 7 | 7 | 10 | 10 |
 | 10,000 | 10 | 9 | 13 | 13 |

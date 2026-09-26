@@ -1,8 +1,6 @@
 package daa;
 
 import java.util.Objects;
-
-/** In-place BFPRT selection, using groups of five and zero-based ranks. */
 public final class DeterministicSelector {
     public record Selection(int value, Metrics metrics) { }
 
@@ -29,7 +27,6 @@ public final class DeterministicSelector {
             int end = Math.min(start + 5, hi);
             m.insertionSort(a, start, end);
             int median = start + (end - start) / 2;
-            // Store medians in the same array, avoiding temporary subarrays.
             m.swap(a, lo + groups, median);
             groups++;
         }
@@ -43,7 +40,6 @@ public final class DeterministicSelector {
             else if (comparison > 0) m.swap(a, i, --gt);
             else i++;
         }
-        // Apart from pivot selection, recurse only into the side containing k.
         if (k < lt) return select(a, lo, lt, k, depth + 1, m);
         if (k >= gt) return select(a, gt, hi, k, depth + 1, m);
         return pivot;

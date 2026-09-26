@@ -13,8 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-
-/** Reproducible, instrumented timing experiment; never times reference checks. */
 public final class Experiment {
     private static final int[] SIZES = {100, 1000, 10000, 100000, 300000};
     private static final int TRIALS = 7;
@@ -31,7 +29,6 @@ public final class Experiment {
         System.out.println("Divide-and-conquer experiment | Java " + System.getProperty("java.version"));
         System.out.println("7 measured trials; 3 warm-ups per case; deterministic seeds.");
         System.out.println("Times include algorithm counters and internal buffers; exclude generation, copies and checks.");
-        // Exercise all branches before starting the measured cases.
         for (DataSets.Type type : DataSets.Type.values()) {
             for (String algorithm : new String[] {"MergeSort", "QuickSort", "Select", "ClosestPair"}) {
                 for (int t = 0; t < 12; t++) measure(new Case(algorithm, type, 10000), -100 - t, false);
@@ -49,7 +46,6 @@ public final class Experiment {
             cases.add(new Case("ClosestPair", type, 2000));
             for (int n : new int[] {100, 1000, 2000}) cases.add(new Case("BruteForce", type, n));
         }
-        // Deterministic case shuffling reduces systematic size/order bias.
         Collections.shuffle(cases, new Random(20260926));
         try (PrintWriter out = new PrintWriter(Files.newBufferedWriter(directory.resolve("results.csv"), StandardCharsets.UTF_8))) {
             out.println("algorithm,input_type,n,trial,input_seed,pivot_seed,k,elapsed_ns,max_recursion_depth,recursive_calls,comparisons,swaps,array_writes,distance_evaluations,buffer_elements,checksum");

@@ -3,7 +3,6 @@ package daa;
 import java.util.Arrays;
 import java.util.SplittableRandom;
 
-/** Dependency-free automated tests. A failing check throws and exits nonzero. */
 public final class AlgorithmTests {
     private static int checks;
     private static int sortingCases;
