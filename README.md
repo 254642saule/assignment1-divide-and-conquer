@@ -67,6 +67,7 @@ To refresh the text captured in the images on Bash, use `bash scripts/run.sh dem
 | `docs/SUBMISSION_RU.md` | Run and GitHub submission instructions |
 | `docs/DAA_Assignment1_Guide_RU.pdf` | Six-page Russian quick-start and defense guide |
 | `scripts/` | Portable runners and report regeneration |
+| `.github/workflows/java-ci.yml` | Automatic Java 17 build/test configuration for Linux and Windows |
 | `pom.xml`, `.gitignore` | Maven configuration and generated-file exclusions |
 
 ## B. Algorithm analysis
@@ -257,9 +258,13 @@ Tests throw on failure and return a nonzero exit code; they do not rely on Java'
 
 ## Git workflow and submission
 
-The repository's commits record the actual preparation sequence: structure, each algorithm, tests, instrumentation, real experiments, runner fixes and report. The history is included in the delivery archive and tagged `v1.0`. Use `git log --oneline --reverse` to inspect it. It is not a reconstructed or backdated multi-day history. Commit attribution reflects the author that performed these steps.
+The repository's commits record the actual preparation sequence: structure, each algorithm, tests, instrumentation, real experiments, runner fixes and report. The initial complete version is tagged `v1.0`. The GitHub submission update adds automated correctness checks on the real feature branch `ci/automated-tests`, merged into `main` with a merge commit and tagged `v1.1`. Both branches and tags are included in the delivery archive and backup bundle. Use `git log --graph --oneline --all` and `git branch --all` to inspect them. The history is not reconstructed or backdated; commit attribution reflects the author that performed these steps.
 
-The assignment requires a **GitHub repository URL**. A local archive alone is not that submission. Follow [SUBMISSION_RU.md](docs/SUBMISSION_RU.md) to push the included repository and its tag; uploading files through the website does not preserve this local commit history. Check the rendered README and the repository visibility required by the instructor before submitting the URL.
+The GitHub Actions configuration runs `mvn clean verify` and the packaged demo on Java 17 for both Linux and Windows when changes are pushed or a pull request targets `main`. It is configured but has **not run on GitHub yet**, because the repository has not been published. After pushing, inspect the Actions result rather than assuming it passed. The workflow uses only read access to repository contents. See the official [GitHub Java/Maven workflow guide](https://docs.github.com/en/actions/tutorials/build-and-test-code/java-with-maven).
+
+For later work, create a branch for a concrete change, commit that change, run the tests and merge it into `main`. Use a pull request when reviewing changes on GitHub. Existing merge history is local Git history; no GitHub pull request is claimed to exist.
+
+The assignment requires a **working GitHub repository URL**, submitted in Moodle. The report and analysis are this **README.md**; the Russian PDF is only a supporting guide. A local archive alone is not the submission. Follow [SUBMISSION_RU.md](docs/SUBMISSION_RU.md) to push the included repository, both branches and its tags; uploading files through the website does not preserve this local commit history. Check the rendered README and the repository visibility required by the instructor before submitting the URL.
 
 ## References
 

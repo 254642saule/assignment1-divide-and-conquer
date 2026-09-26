@@ -75,7 +75,8 @@ git status
 git log --oneline --reverse
 git remote add origin https://github.com/YOUR_USERNAME/assignment1-divide-and-conquer.git
 git push -u origin main
-git push origin v1.0
+git push origin ci/automated-tests
+git push origin --tags
 ```
 
 Замени `YOUR_USERNAME` на свой логин GitHub. При запросе авторизации пройди вход через браузер/настроенный менеджер учётных данных. Обычный пароль аккаунта для Git HTTPS не используется.
@@ -85,11 +86,17 @@ git push origin v1.0
 ```bash
 git clone assignment1-history.bundle assignment1-restored
 cd assignment1-restored
+git branch ci/automated-tests origin/ci/automated-tests
 git remote remove origin
 git remote add origin https://github.com/YOUR_USERNAME/assignment1-divide-and-conquer.git
 git push -u origin main
-git push origin v1.0
+git push origin ci/automated-tests
+git push origin --tags
 ```
+
+В проекте есть основная ветка `main` и ветка `ci/automated-tests`: автоматическая проверка добавлена в отдельной ветке и включена в `main` через merge commit. Теги `v1.0` и `v1.1` отмечают исходный комплект и обновление workflow. Посмотреть ветки и слияние можно командами `git branch --all` и `git log --graph --oneline --all`.
+
+После публикации открой раздел Actions: там должна запуститься проверка сборки и тестов на Linux и Windows. В текущем комплекте есть конфигурация; успешный запуск GitHub ещё не заявлен. Если проверка завершится ошибкой, нужно прочитать её журнал и исправить причину перед сдачей.
 
 Не загружай только исходники через «Upload files», если хочешь сохранить историю: это создаст новые коммиты загрузки вместо переноса существующих. Не нужно повторно выполнять `git init` или изменять авторство прошлых коммитов.
 
